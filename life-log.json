@@ -1,6 +1,10 @@
 [
   {
     "timestamp": "2025-06-13T22:10:16.137058",
-    "data": "This is the first life log. I'll keep the design as minimal as possible for now due to time constraints. You’ll understand why in the next log very soon."
+    "data": "This is the first life log. I'll keep the design as minimal as possible for now due to time constraints. You\u2019ll understand why in the next log very soon."
+  },
+  {
+    "timestamp": "2025-06-15T10:40:58.217834",
+    "data": "I've started preparing for the think-cell C++ developer interview. The application process looks very tough: it begins with a challenging online assessment, followed by two interviews. Although the job description says it's open to fresh graduates, the reviews suggest they're really aiming for experts. Preparing…"
   }
 ]
