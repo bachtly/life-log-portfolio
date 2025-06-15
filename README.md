@@ -141,32 +141,43 @@ This will generate a new commit (e.g., `abc1234`) representing your log entry.
 
 ### ✅ Step 3: Create Timestamp Proof
 
-Save the commit hash to a file:
+Save the commit hash to a new timestamped file in the ots directory:
 
 ```bash
-git rev-parse HEAD > latest.commit
+# Get the commit hash
+COMMIT_HASH=$(git rev-parse HEAD)
+# Create a timestamp with date format
+TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+# Save to a new file with timestamp in name
+git rev-parse HEAD > "ots/commit-${TIMESTAMP}.txt"
 ```
 
-Then generate the OpenTimestamps proof:
+Then generate the OpenTimestamps proof for both files:
 
 ```bash
-ots stamp latest.commit
+cd ots
+ots stamp "commit-${TIMESTAMP}.txt"
 ```
 
-This creates a file called `latest.commit.ots`.
+This creates timestamp proof files `ots/commit-${TIMESTAMP}.txt.ots`.
 
 ---
 
 ### ✅ Step 4: Commit the Timestamp Proof
 
-Add the two generated files and commit them:
+Add the generated files and commit them:
 
 ```bash
-git add latest.commit latest.commit.ots
-git commit -m "Timestamp: Proof for commit abc1234"
+git add ots/commit-${TIMESTAMP}.txt ots/commit-${TIMESTAMP}.txt.ots
+git commit -m "Timestamp: Proof for commit ${COMMIT_HASH:0:7}"
 ```
 
-(Optionally rename the `.ots` file to include the commit ID: `ots/timestamp-abc1234.ots` for clarity.)
+The timestamped files already include the date and time for historical tracking. You can also include the commit hash in the filename if desired:
+
+```bash
+mv "ots/commit-${TIMESTAMP}.txt" "ots/commit-${TIMESTAMP}-${COMMIT_HASH:0:7}.txt"
+mv "ots/commit-${TIMESTAMP}.txt.ots" "ots/commit-${TIMESTAMP}-${COMMIT_HASH:0:7}.txt.ots"
+```
 
 ---
 
